@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Layla5/tinyapp/issues"
   },
-  "homepage": "https://github.com/Layla5/tinyapp#readme"
+  "homepage": "https://github.com/Layla5/tinyapp#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
