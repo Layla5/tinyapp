@@ -4,7 +4,7 @@ var cookieSession = require('cookie-session')
 const app = express();
 app.use(cookieSession({
   name: 'session',
-  keys: ["I like potato", "super secret"],
+  keys: ["secret key", "very secret key"],
   maxAge: 24 * 60 * 60 * 1000 
 }))
 const PORT = 8080; 
