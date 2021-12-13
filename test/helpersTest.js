@@ -27,4 +27,4 @@ describe('findUserByEmail', function() {
 		assert.isUndefined(user);
   });
 
-});
+}); 
