@@ -8,6 +8,7 @@
 
 <body>
 	<%- include('partials/_header') %>
+  <% if (user) { %>
   <div class="card text-center">
       <div class="card-header"></div>
       <div class="card-body">
@@ -26,7 +27,16 @@
 		</div>
   </div>
 	
-		
+	<% } else { %> 
+    <main style="margin: 1em;">
+      <% if (userError) { %>
+        
+        <p>Please login with the right account.</p>
+        <% } else { %> 
+        <p>Please <a href="/login">log in</a> or <a href="/register">register</a> first.</p>
+        <% } %>
+    </main>
+    <% } %>
 
 	
   <!-- Bootstrap JS -->
