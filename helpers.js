@@ -1,3 +1,5 @@
+//find user by email function
+
 const findUserByEmail = (email, users) => {
   for(const id in users) {
     const user = users[id];
@@ -8,6 +10,8 @@ const findUserByEmail = (email, users) => {
   return undefined;
 }
 
+
+//url for users function
 const urlsForUser = (userID, urlDatabase) => {
   const userUrls = {};
   for(const id in urlDatabase) {

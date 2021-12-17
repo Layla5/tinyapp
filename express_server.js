@@ -8,12 +8,13 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 
 }))
 const PORT = 8080; 
+//This tells the Express app to use EJS as its templating engine
 app.set("view engine", "ejs");
 
 const bodyParser = require("body-parser");
 const bcrypt = require('bcryptjs');
+//Making data readable for humans
 app.use(bodyParser.urlencoded({extended: true}));
-
 
 const { findUserByEmail, urlsForUser } = require("./helpers");
 
@@ -30,12 +31,13 @@ const urlDatabase = {
   }
 };
 
-
+//Showcase JSON string representing the entire urlDatabase object
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
 });
 
-
+// route for /urls_index.ejs, will pass the URL data to our template.
+//When sending variables to an EJS template, we need to send them inside an object
 app.get("/urls", (req, res) => {
   const user = users[req.session.user_id]
   const templateVars = { 
@@ -57,6 +59,8 @@ app.get("/urls", (req, res) => {
   
 });
 
+//creating a post req to shortURL-longURL key-value pair are saved to the urlDatabase when it receives a POST request to /urls
+// will then be redirected to the shortURL page
 app.post("/urls", (req, res) => {
   const user = users[req.session.user_id];
   if (user) {
@@ -110,6 +114,7 @@ app.post("/register", (req, res) => {
   res.redirect("/urls");
 });
 
+//login
 app.get("/login", (req, res) => {
   const user = users[req.session.user_id];
   if (user) {
@@ -144,12 +149,11 @@ app.post("/login", (req, res) => {
   res.redirect("/urls");
 });
 
+//logout
 app.post("/logout", (req, res) => {
   delete req.session.user_id;
   res.redirect("/urls");
 });
-
-
 
 app.post("/urls/:id", (req, res) => {
   const shortURL = req.params.id;
@@ -157,7 +161,6 @@ app.post("/urls/:id", (req, res) => {
   const urls = urlsForUser(user_id, urlDatabase);
 
   
-
   if (shortURL in urls) {
     let url = urlDatabase[shortURL];
     url["longURL"] = req.body.newURL;
@@ -242,7 +245,6 @@ app.get("/u/:shortURL", (req, res) => {
 function generateRandomString() {
   return Math.random().toString(36).substr(2, 6);
 }
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
